@@ -9,7 +9,93 @@
   <body>
     <nav class="bg-indigo-600 shadow-md px-4 py-3">
       <div class="container mx-auto flex justify-between items-center">
-        <div class="text-white text-xl font-bold font-mono">Burasmi Catering</div>
+        <div class="text-white text-xl font-bold font-mono">
+          Burasmi Catering
+        </div>
+        <ul class="hidden md:flex space-x-6">
+          <li><a href="#" class="text-white hover:text-red-500">Home</a></li>
+          <li><a href="#" class="text-white hover:text-red-500">Menu</a></li>
+          <li><a href="#" class="text-white hover:text-red-500">Contact</a></li>
+          <li>
+            <a href="#" class="text-white hover:text-red-500">About Us</a>
+          </li>
+        </ul>
+        <div class="md:hidden">
+          <button id="menu-toggle" class="text-white focus:outline-none">
+            ☰
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="md:hidden hidden px-4 pt-2 pb-4 space-y-2">
+        <a href="#" class="block text-white hover:text-red-500">Home</a>
+        <a href="#" class="block text-white hover:text-red-500">Menu</a>
+        <a href="#" class="block text-white hover:text-red-500">About</a>
+        <a href="#" class="block text-white hover:text-red-500">Contact</a>
+      </div>
     </nav>
+    <div class="relative overflow-hidden w-full h-64" id="slider">
+      <div
+        class="flex transition-transform duration-500 ease-in-out"
+        id="slides"
+      >
+        <img src="img1.jpg" class="w-full flex-shrink-0 object-cover" />
+        <img src="img1.jpg" class="w-full flex-shrink-0 object-cover" />
+        <img src="img1.jpg" class="w-full flex-shrink-0 object-cover" />
+        <img src="img1.jpg" class="w-full flex-shrink-0 object-cover" />
+        <img src="img1.jpg" class="w-full flex-shrink-0 object-cover" />
+        <img src="img1.jpg" class="w-full flex-shrink-0 object-cover" />
+      </div>
+
+      <!-- Tombol Navigasi -->
+      <button
+        id="prevBtn"
+        class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/50 hover:bg-white text-black px-2 py-1 rounded"
+      >
+        ⟨
+      </button>
+      <button
+        id="nextBtn"
+        class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/50 hover:bg-white text-black px-2 py-1 rounded"
+      >
+        ⟩
+      </button>
+    </div>
+
+    <script>
+      const toggleBtn = document.getElementById("menu-toggle");
+      const menu = document.getElementById("mobile-menu");
+
+      toggleBtn.addEventListener("click", () => {
+        menu.classList.toggle("hidden");
+      });
+    </script>
+
+    <script>
+      const slides = document.getElementById("slides");
+      const totalSlides = slides.children.length;
+      let index = 0;
+
+      document.getElementById("nextBtn").addEventListener("click", () => {
+        index = (index + 1) % totalSlides;
+        updateSlider();
+      });
+
+      document.getElementById("prevBtn").addEventListener("click", () => {
+        index = (index - 1 + totalSlides) % totalSlides;
+        updateSlider();
+      });
+
+      function updateSlider() {
+        slides.style.transform = `translateX(-${index * 100}%)`;
+      }
+
+      // Optional Auto Slide
+      setInterval(() => {
+        index = (index + 1) % totalSlides;
+        updateSlider();
+      }, 5000); // 5 detik
+    </script>
   </body>
 </html>
